@@ -14,7 +14,7 @@ class Twitter:
         """Inisialisasi koneksi Twitter API"""
         try:
             auth = tweepy.OAuthHandler(constant.CONSUMER_KEY, constant.CONSUMER_SECRET)
-            auth.set_access_token(constant.ACCESS_KEY, constant.ACCESS_SECRET)
+            auth.set_access_token(constant.ACCESS_TOKEN, constant.ACCESS_TOKEN_SECRET)
             return tweepy.API(
                 auth,
                 wait_on_rate_limit=True,
