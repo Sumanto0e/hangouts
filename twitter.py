@@ -39,7 +39,7 @@ class Twitter:
             self._check_rate_limit()
             self._api.delete_direct_message(dm_id)
             return True
-        except tweepy.TweepError as e:
+        except tweepy.errors.TweepyException as e:
             print(f"Gagal hapus DM {dm_id}: {str(e)}")
             return False
 
@@ -62,7 +62,7 @@ class Twitter:
             print(f"Berhasil mengambil {len(processed_dms)} DM")
             return processed_dms[::-1]  # Balik urutan agar yang terbaru di depan
             
-        except tweepy.TweepError as e:
+        except tweepy.errors.TweepyException as e:
             print(f"Error baca DM: {str(e)}")
             return []
 
@@ -76,7 +76,7 @@ class Twitter:
             else:
                 self._api.update_with_media(media_path)
             return True
-        except tweepy.TweepError as e:
+        except tweepy.errors.TweepyException as e:
             print(f"Gagal posting tweet: {str(e)}")
             return False
 
@@ -87,7 +87,7 @@ class Twitter:
             self._check_rate_limit()
             self._api.update_status(text)
             return True
-        except tweepy.TweepError as e:
+        except tweepy.errors.TweepyException as e:
             print(f"Gagal posting text tweet: {str(e)}")
             return False
 
@@ -98,7 +98,7 @@ class Twitter:
             self._check_rate_limit()
             user = self._api.get_user(user_id=user_id)
             return user.screen_name
-        except tweepy.TweepError as e:
+        except tweepy.errors.TweepyException as e:
             print(f"Gagal dapatkan username: {str(e)}")
             return None
 
@@ -109,6 +109,6 @@ class Twitter:
             user = self._api.verify_credentials()
             print(f"Terhubung sebagai: @{user.screen_name}")
             return True
-        except tweepy.TweepError as e:
+        except tweepy.errors.TweepyException as e:
             print(f"Gagal verifikasi: {str(e)}")
             return False
